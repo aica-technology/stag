@@ -1,6 +1,6 @@
-#include "StagDetector.h"
-#include "Ellipse.h"
-#include "utility.h"
+#include "stag/StagDetector.h"
+#include "stag/Ellipse.h"
+#include "stag/utility.h"
 
 #define HALF_PI 1.570796326794897
 

@@ -7,7 +7,7 @@
 inline double FastSinHP(double x);
 inline double FastCosHP(double x);
 
-#include "Ellipse.h"
+#include "stag/Ellipse.h"
 
 #define pi 3.14159265
 #define BOOKSTEIN 0       // method1

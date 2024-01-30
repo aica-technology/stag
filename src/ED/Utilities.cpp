@@ -18,7 +18,7 @@
 #include <windows.h>
 #endif // DEBUG
 
-#include "Utilities.h"
+#include "stag/ED/Utilities.h"
 
 // Burak - suppresses _CRT_SECURE_NO_DEPRECATE warnings
 #pragma warning(disable : 4996)

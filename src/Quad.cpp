@@ -1,5 +1,5 @@
-#include "Quad.h"
-#include "utility.h"
+#include "stag/Quad.h"
+#include "stag/utility.h"
 
 using cv::Point2d;
 using cv::Point3d;

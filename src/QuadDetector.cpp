@@ -2,8 +2,8 @@
 #include <algorithm>
 #include "opencv2/opencv.hpp"
 
-#include "QuadDetector.h"
-#include "utility.h"
+#include "stag/QuadDetector.h"
+#include "stag/utility.h"
 
 using cv::Point2d;
 

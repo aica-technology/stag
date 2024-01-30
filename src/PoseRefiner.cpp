@@ -1,7 +1,7 @@
 #include <numeric>
-#include "PoseRefiner.h"
-#include "Ellipse.h"
-#include "utility.h"
+#include "stag/PoseRefiner.h"
+#include "stag/Ellipse.h"
+#include "stag/utility.h"
 
 using cv::Point2d;
 using cv::Mat;
