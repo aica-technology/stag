@@ -19,8 +19,8 @@
 #include "stag/ED/GradientOperators.h"
 #include "stag/ED/ValidateEdgeSegments.h"
 
-#include "Utilities.h"
-#include "Timer.h"
+#include "stag/ED/Utilities.h"
+#include "stag/ED/Timer.h"
 
 //Burak - won't be needing this
 //#include "ImageVideoLib.h"

@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <float.h>
 
-#include "EDInternals.h"
-#include "ImageSmooth.h"
-#include "GradientOperators.h"
+#include "stag/ED/EDInternals.h"
+#include "stag/ED/ImageSmooth.h"
+#include "stag/ED/GradientOperators.h"
 
 #include "stag/ED/ED.h"
 #include "stag/ED/EDLines.h"

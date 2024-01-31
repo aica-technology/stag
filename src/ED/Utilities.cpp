@@ -12,7 +12,7 @@
 
 // Burak - commented the line below
 //#include "ImageVideoLib.h"
-#include "Timer.h"
+#include "stag/ED/Timer.h"
 
 #ifndef BUILD_MACOS
 #include <windows.h>
