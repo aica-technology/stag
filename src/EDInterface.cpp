@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <vector>
-#include "EDInterface.h"
-#include "utility.h"
+#include "stag/EDInterface.h"
+#include "stag/utility.h"
 
 using std::vector;
 using std::max;

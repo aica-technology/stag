@@ -13,14 +13,14 @@
 
 //#include "EDDLL.h"
 
-#include "EDInternals.h"
-#include "ED.h"
-#include "ImageSmooth.h"
-#include "GradientOperators.h"
-#include "ValidateEdgeSegments.h"
+#include "stag/ED/EDInternals.h"
+#include "stag/ED/ED.h"
+#include "stag/ED/ImageSmooth.h"
+#include "stag/ED/GradientOperators.h"
+#include "stag/ED/ValidateEdgeSegments.h"
 
-#include "Utilities.h"
-#include "Timer.h"
+#include "stag/ED/Utilities.h"
+#include "stag/ED/Timer.h"
 
 //Burak - won't be needing this
 //#include "ImageVideoLib.h"

@@ -1,61 +1,24 @@
-cmake_minimum_required(VERSION 3.16)
-project(Stag)
+cmake_minimum_required(VERSION 3.2)
+PROJECT(STag VERSION 0.0.0 LANGUAGES CXX)
 
-IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Release)
-ENDIF()
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+set(BUILD_TESTING OFF)
 
-MESSAGE("Build type: " ${CMAKE_BUILD_TYPE})
+find_package(OpenCV REQUIRED)
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
-IF (WIN32)
-  set(CMAKE_DEBUG_POSTFIX "d")
-  set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-ENDIF (WIN32)
+FILE(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall -w  ")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -w ")
+add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 
-# Check C++11 or C++0x support
-include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+if(BUILD_TESTING)
+        add_executable(stag_main ${PROJECT_SOURCE_DIR}/src/example.cpp)
+        target_link_libraries(stag_main ${OpenCV_LIBS} ${PROJECT_NAME})
+endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+install(TARGETS ${PROJECT_NAME}
+        DESTINATION lib)
 
-find_package(OpenCV 4 REQUIRED)
-
-file(GLOB SRC_FILE1 "src/*.c*")
-file(GLOB SRC_FILE2 "src/ED/*.c*")
-
-include_directories(
-    ${OpenCV_INCLUDE_DIRS}
-    src/
-    src/ED/
-)
-add_library(
-    staglib
-    ${SRC_FILE1}
-    ${SRC_FILE2}
-        src/Stag.cpp
-        src/Stag.h
-)
-target_link_libraries(
-    staglib
-    ${OpenCV_LIBS}
-)
-
-add_executable(
-    stag_example
-    main.cpp
-)
-
-target_link_libraries(
-    stag_example
-    staglib
-)
-
-IF (MSVC)
-  set_target_properties(stag_example PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
-  set_target_properties(stag_example PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_BINARY_DIR})
-  set_target_properties(stag_example PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_BINARY_DIR})
-ENDIF (MSVC)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/
+        DESTINATION include)

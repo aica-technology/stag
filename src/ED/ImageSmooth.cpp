@@ -5,8 +5,8 @@
 #include <opencv2/imgproc/types_c.h>
 #include <opencv2/imgproc/imgproc_c.h>
 
-#include "ImageSmooth.h"
-#include "ImageSmoothCV.h"
+#include "stag/ED/ImageSmooth.h"
+#include "stag/ED/ImageSmoothCV.h"
 
 ///----------------------------------------------------------
 /// Copy from our buffer to Ipl image buffer taking care of the alignment

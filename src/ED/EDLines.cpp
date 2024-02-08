@@ -4,16 +4,16 @@
 #include <stdio.h>
 #include <float.h>
 
-#include "EDInternals.h"
-#include "ImageSmooth.h"
-#include "GradientOperators.h"
+#include "stag/ED/EDInternals.h"
+#include "stag/ED/ImageSmooth.h"
+#include "stag/ED/GradientOperators.h"
 
-#include "ED.h"
-#include "EDLines.h"
-#include "LineSegment.h"
-#include "NFA.h"
-#include "MyMath.h"
-#include "Timer.h"
+#include "stag/ED/ED.h"
+#include "stag/ED/EDLines.h"
+#include "stag/ED/LineSegment.h"
+#include "stag/ED/NFA.h"
+#include "stag/ED/MyMath.h"
+#include "stag/ED/Timer.h"
 
 /** PI */
 #ifndef M_PI
