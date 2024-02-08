@@ -1,90 +1,20 @@
-# STag - A Stable, Occlusion-Resistant Fiducial Marker System
+# STag: A Stable Fiducial Marker System
 
-This repository is an improved and updated fork of the [stable fiducial marker system](https://github.com/bbenligiray/stag), using __OpenCV 4__.
+Code used in the following paper:
 
-> [!NOTE]
-> For the corresponding __Python__ package, refer to: https://github.com/ManfredStoiber/stag-python.
+[B. Benligiray; C. Topal; C. Akinlar, "STag: A Stable Fiducial Marker System," Image and Vision Computing (Accepted), 2019.](https://arxiv.org/abs/1707.06292)
 
-## 📊 Comparison Between Different Marker Systems:
-[<img src="https://github.com/ManfredStoiber/stag/assets/47210077/668ca457-33dd-4ce7-8b94-662c7a5bb4d9" width="400" height="200" />](https://www.youtube.com/watch?v=vnHI3GzLVrY)
+Markers (will provide a generation script in the future):
 
-## 📖 Usage
-```c++
-// load image
-cv::Mat image = cv::imread("example.jpg");
+https://drive.google.com/drive/folders/0ByNTNYCAhWbIV1RqdU9vRnd2Vnc
 
-// set HD library
-int libraryHD = 21;
+### TODO:
+* Add a makefile
+* Write Matlab and Python wrappers
 
-auto corners = std::vector<std::vector<cv::Point2f>>();
-auto ids = std::vector<int>();
-auto rejectedImgPoints = std::vector<std::vector<cv::Point2f>>(); // optional, helpful for debugging
+[![Supplementary Video](https://user-images.githubusercontent.com/19530665/57184379-6a250580-6ec3-11e9-8ab3-7e139966f13b.png)](https://www.youtube.com/watch?v=vnHI3GzLVrY) 
 
-// detect markers
-stag::detectMarkers(image, libraryHD, corners, ids, rejectedImgPoints);
-
-// draw and save results
-stag::drawDetectedMarkers(image, corners, ids);
-cv::imwrite("example_result.jpg", image);
-```
-
-For an explanation of `libraryHD = 21` refer to [Configuration](#-configuration)
-
-## 🏷 Markers
-
-- Markers are downloadable here: [Drive](https://drive.google.com/drive/folders/0ByNTNYCAhWbIV1RqdU9vRnd2Vnc?resourcekey=0-9ipvecbezW8EWUva5GBQTQ&usp=sharing)
-- Reference code for Marker Generator: [ref/marker_generator](https://github.com/ManfredStoiber/stag/tree/master/ref/marker_generator)
-
-## 📋 Getting Started
-0. __Install__ Prerequisites
-
-    [__CMake__ >= 3.16](https://cmake.org/getting-started/)
-    - On Linux: `apt install cmake`
-
-    [__OpenCV__ 4](https://opencv.org/get-started/) for C++
-    - On Linux: `apt install libopencv-dev`
-1. __Clone__ this repository
-   
-    - `git clone https://github.com/ManfredStoiber/stag`
-2. __Build__ the project.
-
-   In the project directory, run the following commands:
-    1. `mkdir build`
-    2. `cd build`
-    3. `cmake ..`
-    4. `cmake --build .`
-3. __Run__ the example
-    - On Linux: Run `./stag_example`
-    - On Windows: Run `stag_example.exe`
-
-   This example application detects the markers in `../example.jpg` and saves the visualized results to `example_result.jpg`
-
-> [!NOTE]
-> The library is created as static by default. If you want to create a shared library instead, use the cmake option `BUILD_SHARED_LIBS=ON`.
-
-## 🛠 Configuration
-When initializing the library, following parameters can be specified:
-- __`libraryHD`__:
-  - Sets the "family" or "type" of used STag markers
-    - Each library has a different amount of markers
-    - Only the markers of the chosen library will be detected
-  - The following HD libraries are possible:
-
-    | __HD__           | 11     | 13    | 15  | 17  | 19 | 21 | 23 |
-    |------------------|--------|-------|-----|-----|----|----|----|
-    | __Library Size__ | 22,309 | 2,884 | 766 | 157 | 38 | 12 | 6  |
-
-  - Specifies the used Hamming Distance, for further information refer to the [original paper](https://arxiv.org/abs/1707.06292)
-
-
-- __`errorCorrection`__: 
-   - Sets the amount of error correction
-   - Has to be in range `0 <= errorCorrection <= (libraryHD-1)/2`
-   - For further information refer to the [original paper](https://arxiv.org/abs/1707.06292)
-
-## 📰 Originally Published in the Following Paper:
-
-[B. Benligiray; C. Topal; C. Akinlar, "STag: A Stable Fiducial Marker System," Image and Vision Computing, 2019.](https://arxiv.org/abs/1707.06292)
+Some figures from the paper:
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/19530665/57179654-c0c11e00-6e88-11e9-9ca5-0c0153b28c91.png"/>
@@ -93,3 +23,41 @@ When initializing the library, following parameters can be specified:
 <p align="center">
   <img src="https://user-images.githubusercontent.com/19530665/57179660-cae31c80-6e88-11e9-8f80-bf8e24e59957.png"/>
 </p>
+
+## Dockerfile and example code:
+
+Set BUILD_TESTING in CMakeLists to ON, and build the Dockerfile
+
+### Dockerfile
+
+``` Dockerfile
+# syntax=docker/dockerfile:1
+
+# Use an official Ubuntu runtime as the base image
+FROM ubuntu:22.04
+
+# Update the system
+RUN apt-get update -y && apt-get upgrade -y
+
+# Install OpenCV
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libopencv-dev cmake g++
+# RUN apt-get install -y g++
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Create a build directory and navigate into it
+RUN mkdir build && cd build
+
+# Run CMake to generate the Makefile
+RUN cmake .
+
+# Build the project
+RUN make
+
+# Run the compiled binary
+CMD ["./stag_main"]
+```
