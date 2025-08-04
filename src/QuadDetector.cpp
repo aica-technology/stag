@@ -61,7 +61,6 @@ void QuadDetector::detectQuads(const cv::Mat &image, EDInterface* edInterface)
 			}
 			else {
                 quads.push_back(quad);
-                break;
             }
 		}
 	}
