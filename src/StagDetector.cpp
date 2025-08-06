@@ -41,7 +41,12 @@ void StagDetector::detectMarkers(const Mat& inImage)
 		{
 			Marker marker(quad, id);
 			marker.shiftCorners2(shift);
-			markers.push_back(marker);
+
+			// only add marker if similar not already found
+			if (!marker.isSimilarIn(markers))
+			{
+				markers.push_back(marker);
+			}
 		}
 		else
 			falseCandidates.push_back(quad);
